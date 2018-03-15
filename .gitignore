@@ -33,3 +33,5 @@ var/log
 var/log/*
 .idea/
 .idea/*
+
+package-lock.json
