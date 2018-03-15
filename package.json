@@ -16,6 +16,7 @@
     "body-parser": "1.18.2",
     "consign": "0.1.6",
     "express": "4.16.3",
+    "js-yaml": "3.11.0",
     "mongoose": "5.0.10",
     "safira": "1.1.1"
   }

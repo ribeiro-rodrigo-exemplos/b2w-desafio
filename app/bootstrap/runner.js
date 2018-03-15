@@ -1,9 +1,9 @@
 const safira = require('safira'); 
 
 class Runner{
-    constructor(app){
+    constructor(app,config){
         this._app = app; 
-        this._port = 3000; 
+        this._port = config.server.port; 
     }
 
     created(){
