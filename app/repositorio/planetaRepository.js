@@ -9,6 +9,10 @@ class PlanetaRepository{
     obterPlanetaPorId(id){
         
     }
+
+    removerPlaneta(id){
+        
+    }
 }
 
 safira.define(PlanetaRepository); 

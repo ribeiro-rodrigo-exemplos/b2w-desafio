@@ -68,4 +68,23 @@ describe('Testando o controlador planetaController', () => {
             .end(done); 
     })
 
+    it("#Removendo planeta",done => {
+
+        var metodoChamado = false; 
+        planetaRepository.removerPlaneta = () => {
+            metodoChamado = true; 
+            return Promise.resolve(); 
+        }
+
+        request(app)
+            .delete('/v1/planetas/1')
+            .timeout(1000)
+            .expect(204)
+            .end(() => {
+                assert(metodoChamado);
+                done(); 
+            }); 
+
+    });
+
 }); 

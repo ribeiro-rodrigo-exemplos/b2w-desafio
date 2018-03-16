@@ -27,6 +27,9 @@ class PlanetaController{
 
     removerPlaneta(req,res){
         
+        this._planetaRepository
+                .removerPlaneta(req.params.id)
+                .then(() => res.sendStatus(204)); 
     }
 }
 
