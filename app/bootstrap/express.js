@@ -4,6 +4,6 @@ const safira = require('safira');
 const bodyParser = require('body-parser'); 
 
 const app = express(); 
-app.use(bodyParser()); 
+app.use(bodyParser.json()); 
 
 safira.defineObject(app,'app'); 

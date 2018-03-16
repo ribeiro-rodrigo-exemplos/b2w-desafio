@@ -26,13 +26,15 @@ class PlanetaController{
                     res.status(201)
                         .json(planetaAdicionado); 
                 })
+                .catch(error => next(error)); 
     }
 
-    obterPlanetaPorId(req,res){
+    obterPlanetaPorId(req,res,next){
 
         this._planetaRepository
                 .obterPlanetaPorId(req.params.id) 
-                .then(planeta => planeta ? res.json(planeta) : res.sendStatus(404)); 
+                .then(planeta => planeta ? res.json(planeta) : res.sendStatus(404))
+                .catch(error => next(error)); 
     }
 
     removerPlaneta(req,res){
