@@ -1,7 +1,8 @@
 const consign = require('consign')
 
 consign({cwd:'app'})
-    .include('bootstrap/config.js') 
+    .include('bootstrap/config.js')
+    .then('infra') 
     .then('bootstrap/express.js')
     .then('database')
     .then('modelo')

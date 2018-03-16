@@ -2,19 +2,22 @@ const safira = require('safira');
 
 class PlanetaController{
 
-    constructor(planetaRepository,swApiService){
+    constructor(planetaRepository,swApiService,logger){
         this._planetaRepository = planetaRepository; 
         this._swApiService = swApiService; 
+        this._logger = logger; 
     }
 
     listarPlanetas(req,res){
+        this._logger.info("Listando todos os planetas"); 
 
         this._planetaRepository
                 .listarPlanetas()
                 .then(planetas => planetas.length ? res.json(planetas) : res.sendStatus(204)); 
     }
 
-    adicionarPlaneta(req,res){
+    adicionarPlaneta(req,res,next){
+        this._logger.info("Adicionando planeta"); 
 
         this._swApiService
                 .obterParticipacoesDoPlanetaEmFilmes(req.body.nome)
@@ -29,6 +32,7 @@ class PlanetaController{
     }
 
     obterPlanetaPorId(req,res,next){
+        this._logger.info(`Obtendo planeta ${req.params.id}`); 
 
         this._planetaRepository
                 .obterPlanetaPorId(req.params.id) 
@@ -37,6 +41,7 @@ class PlanetaController{
     }
 
     removerPlaneta(req,res){
+        this._logger.info(`Removendo planeta ${req.params.id}`); 
         
         this._planetaRepository
                 .removerPlaneta(req.params.id)

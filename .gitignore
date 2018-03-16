@@ -29,8 +29,8 @@ node_modules/*
 .vscode/
 .vscode/*
 var/
-var/log
-var/log/*
+log
+log/*
 .idea/
 .idea/*
 

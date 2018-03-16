@@ -7,3 +7,11 @@ server:
   port: 3009 
 
 swApi: https://swapi.co/api
+
+log:
+  path: /var/log/desafio
+  maxSize: 100000
+  maxFiles: 10
+  files:
+    erro: desafio-erro.log
+    info: desafio-info.log
