@@ -19,9 +19,9 @@ describe('Testando o controlador planetaController', () => {
             {id:1,nome:"Marte",clima:"Semiárido",terreno:"deserto"}, 
             {id:2,nome:"Plutão",clima:"Frio",terreno:"deserto"}, 
             {id:3,nome:"Jupiter",clima:"Desértico",terreno:"deserto"}
-       ]
+        ]
 
-        planetaRepository.listarPlanetas = () => Promise.resolve(todosOsPlanetas);  
+       planetaRepository.listarPlanetas = () => Promise.resolve(todosOsPlanetas);  
 
        request(app)
             .get('/v1/planetas')
@@ -43,5 +43,29 @@ describe('Testando o controlador planetaController', () => {
             .end(done)  
 
     }); 
+
+    it("#Retornando planeta por id",done => {
+
+        const planeta = {nome:"Tatooine",clima:"arid",terreno:"desert",participacoes:5}; 
+        planetaRepository.obterPlanetaPorId = () => Promise.resolve(planeta)
+
+        request(app)
+            .get('/v1/planetas/1')
+            .expect('Content-Type',/json/) 
+            .timeout(1000)
+            .expect(200)
+            .end(done); 
+    })
+
+    it("#Planeta não encontrado",done => {
+
+        planetaRepository.obterPlanetaPorId = () => Promise.resolve(null)
+
+        request(app)
+            .get('/v1/planetas/1')
+            .timeout(1000)
+            .expect(404)
+            .end(done); 
+    })
 
 }); 

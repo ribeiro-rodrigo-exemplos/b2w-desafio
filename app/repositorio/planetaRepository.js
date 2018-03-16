@@ -5,6 +5,10 @@ class PlanetaRepository{
     listarPlanetas(){
         
     }
+
+    obterPlanetaPorId(id){
+        
+    }
 }
 
 safira.define(PlanetaRepository); 

@@ -20,6 +20,9 @@ class PlanetaController{
 
     obterPlanetaPorId(req,res){
 
+        this._planetaRepository
+                .obterPlanetaPorId(req.params.id) 
+                .then(planeta => planeta ? res.json(planeta) : res.sendStatus(404)); 
     }
 
     removerPlaneta(req,res){
