@@ -1,5 +1,7 @@
 mongodb:
-  url: mongodb://localhost:27017/desafio
+  host: localhost
+  port: 27017
+  database: desafio
 
 server: 
   port: 3009 

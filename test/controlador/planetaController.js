@@ -23,7 +23,9 @@ function obterPlaneta(id){
 }
 
 function salvarPlanetas(planetas){
-    planetas.forEach(planeta => salvarPlaneta(planeta));
+    return Promise.all(
+        planetas.map(planeta => salvarPlaneta(planeta))
+    )
 }
 
 function removerPlaneta(planeta){
@@ -32,7 +34,7 @@ function removerPlaneta(planeta){
 
 function limparBanco(done){
     MongoClient.connect(config.mongodb.url,(error,client) => 
-        databaseCleaner.clean(client.db('test'),() => done())
+        databaseCleaner.clean(client.db(config.mongodb.database),() => done())
     ); 
 }
 
@@ -46,31 +48,27 @@ describe('Testando o controlador planetaController', () => {
         databaseCleaner = new DatabaseCleaner('mongodb'); 
     }); 
 
-    beforeEach(done => {
-
-        limparBanco(done); 
-
-        todosOsPlanetas = [
-            {nome:"Marte",clima:"Semiárido",terreno:"deserto"}, 
-            {nome:"Plutão",clima:"Frio",terreno:"deserto"}, 
-            {nome:"Jupiter",clima:"Desértico",terreno:"deserto"}
-        ];
-    }); 
+    beforeEach(done => limparBanco(done)); 
 
     it('#Retornando todos os planetas',done => {
 
-       salvarPlanetas(todosOsPlanetas); 
+        const todosOsPlanetas = [
+            {nome:"Marte",clima:"Semiárido",terreno:"deserto"}, 
+            {nome:"Plutão",clima:"Frio",terreno:"deserto"}
+        ];
 
-       request(app)
-            .get('/v1/planetas')
-            .expect('Content-Type',/json/)
-            .timeout(1000) 
-            .expect(200) 
-            .end((error,res) => {
-                assert(res.body.length === todosOsPlanetas.length)
-                done()
-            }) 
-
+       salvarPlanetas(todosOsPlanetas)
+        .then(() => {
+            request(app)
+                 .get('/v1/planetas')
+                 .expect('Content-Type',/json/)
+                 .timeout(1000) 
+                 .expect(200) 
+                 .end((error,res) => {
+                     assert(res.body.length === todosOsPlanetas.length)
+                     done()
+                 });  
+        });
     }); 
 
     it("#Nenhum planeta retornado",done => {

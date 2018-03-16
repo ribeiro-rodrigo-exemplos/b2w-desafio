@@ -11,7 +11,6 @@ class SwApiService{
     }
 
     obterParticipacoesDoPlanetaEmFilmes(nomeFilme){
-        console.log(`${this._url}/planets?search=${nomeFilme}`)
         return fetch(`${this._url}/planets?search=${nomeFilme}`,this._configRequest)
                     .then(res => res.json())
                     .then(body => body.results.reduce((quantidade,planeta) => quantidade + planeta.films.length,0))

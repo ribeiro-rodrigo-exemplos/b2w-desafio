@@ -12,5 +12,7 @@ const ambiente = process.env['NODE_ENV'] ? process.env['NODE_ENV'] : 'developmen
 const file = envs[ambiente]; 
 const config = yaml.safeLoad(fs.readFileSync(file)); 
 
+config.environment = process.env['NODE_ENV']; 
+
 safira.defineObject(config,'config'); 
 

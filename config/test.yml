@@ -1,7 +1,6 @@
 mongodb:
-  url: mongodb://localhost:27017/test
-
-server: 
-  port: 3009 
+  host: localhost
+  port: 27017
+  database: test
 
 swApi: https://swapi.co/api
