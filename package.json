@@ -4,6 +4,7 @@
   "description": "Projeto desenvolvido para o desafio do processo seletivo da empresa B2W",
   "main": "server.js",
   "scripts": {
+    "start": "node index", 
     "test": "NODE_ENV=test mocha test/**/*.js"
   },
   "author": "Rodrigo Ribeiro",
