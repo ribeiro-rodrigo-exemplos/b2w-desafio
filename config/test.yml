@@ -3,3 +3,5 @@ mongodb:
 
 server: 
   port: 3009 
+
+swApi: https://swapi.co/api
