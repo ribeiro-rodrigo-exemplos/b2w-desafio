@@ -12,7 +12,6 @@ class PlanetaController{
         this._planetaRepository
                 .listarPlanetas()
                 .then(planetas => planetas.length ? res.json(planetas) : res.sendStatus(204)); 
-
     }
 
     adicionarPlaneta(req,res){
