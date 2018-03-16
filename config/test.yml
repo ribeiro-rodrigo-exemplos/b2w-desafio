@@ -3,4 +3,6 @@ mongodb:
   port: 27017
   database: test
 
-swApi: https://swapi.co/api
+swApi: 
+  host: https://swapi.co/api
+  timeout: 6000

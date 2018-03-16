@@ -6,7 +6,9 @@ mongodb:
 server: 
   port: 3009 
 
-swApi: https://swapi.co/api
+swApi: 
+  host: https://swapi.co/api
+  timeout: 6000
 
 log:
   path: log
