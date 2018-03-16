@@ -11,6 +11,10 @@ class PlanetaRepository{
     }
 
     removerPlaneta(id){
+
+    }
+
+    adicionarPlaneta(planeta){
         
     }
 }

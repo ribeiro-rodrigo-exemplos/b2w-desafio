@@ -7,10 +7,12 @@ describe('Testando o controlador planetaController', () => {
 
     var app; 
     var planetaRepository; 
+    var swApiService; 
 
     before(() => {
         app = safira.bean('app')
         planetaRepository = safira.bean('planetaRepository'); 
+        swApiService = safira.bean('swApiService'); 
     }); 
 
     it('#Retornando todos os planetas',done => {
@@ -41,7 +43,6 @@ describe('Testando o controlador planetaController', () => {
             .timeout(1000) 
             .expect(204) 
             .end(done)  
-
     }); 
 
     it("#Retornando planeta por id",done => {
@@ -86,5 +87,31 @@ describe('Testando o controlador planetaController', () => {
             }); 
 
     });
+
+    it("#Adicionando planeta",done => {
+
+        swApiService.obterParticipacoesDoPlanetaEmFilmes = () => Promise.resolve(12); 
+        
+        planetaRepository.adicionarPlaneta = (planeta) => {
+            planeta.id = 1; 
+            return Promise.resolve(planeta); 
+        }
+
+        const planeta = {nome:"Tatooine",clima:"arid",terreno:"desert"};
+
+        const retornoEsperado = Object.assign(planeta,{}); 
+        retornoEsperado.participacoes = 12; 
+        retornoEsperado.id = 1; 
+
+        request(app)
+            .post('/v1/planetas')
+            .timeout(1000)
+            .send(planeta)
+            .expect(201)
+            .expect('Content-Type',/json/)
+            .expect('Location','/v1/planetas/1')
+            .expect(retornoEsperado)
+            .end(done); 
+    })
 
 }); 

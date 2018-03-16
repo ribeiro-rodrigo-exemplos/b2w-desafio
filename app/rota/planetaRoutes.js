@@ -5,7 +5,7 @@ const app = safira.bean('app');
 
 app.route('/v1/planetas')
     .get(controlador.listarPlanetas.bind(controlador)) 
-    .post(controlador.criarPlaneta.bind(controlador)); 
+    .post(controlador.adicionarPlaneta.bind(controlador)); 
 
 app.route('/v1/planetas/:id') 
     .get(controlador.obterPlanetaPorId.bind(controlador))

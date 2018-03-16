@@ -2,8 +2,9 @@ const safira = require('safira');
 
 class PlanetaController{
 
-    constructor(planetaRepository){
+    constructor(planetaRepository,swApiService){
         this._planetaRepository = planetaRepository; 
+        this._swApiService = swApiService; 
     }
 
     listarPlanetas(req,res){
@@ -14,8 +15,17 @@ class PlanetaController{
 
     }
 
-    criarPlaneta(req,res){
+    adicionarPlaneta(req,res){
 
+        this._swApiService
+                .obterParticipacoesDoPlanetaEmFilmes(req.body.nome)
+                .then(qtdParticipacoes => req.body.participacoes = qtdParticipacoes)
+                .then(() => this._planetaRepository.adicionarPlaneta(req.body))
+                .then(planetaAdicionado => {
+                    res.setHeader('Location',`/v1/planetas/${planetaAdicionado.id}`); 
+                    res.status(201)
+                        .json(planetaAdicionado); 
+                })
     }
 
     obterPlanetaPorId(req,res){
