@@ -12,12 +12,12 @@ class ErroInterceptor{
 
     _intercept(error,req,res,next){
         
-        this._logger.error(error);
-
         if(this._idMalFormatado(error)){
             res.sendStatus(404); 
             return; 
         }
+
+        this._logger.error(error);
 
         res.sendStatus(500); 
     }
